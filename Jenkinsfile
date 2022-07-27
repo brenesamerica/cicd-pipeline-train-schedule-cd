@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Copy files to server'){
+        stage('Build'){
             steps {
             withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                 sshPublisher(
@@ -27,13 +27,6 @@ pipeline {
                 )
             }
             archiveArtifacts artifacts: 'dist/trainSchedule.zip'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
         stage('DeployToStaging') {
