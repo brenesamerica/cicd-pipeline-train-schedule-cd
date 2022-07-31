@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-            withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME']) {
+            withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME')]) {
                 sshPublisher(
                     failOnError: true,
                     continueOnError: false,
