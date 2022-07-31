@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-            withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+            withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME']) {
                 sshPublisher(
                     failOnError: true,
                     continueOnError: false,
@@ -11,8 +11,7 @@ pipeline {
                         sshPublisherDesc(
                             configName: 'build',
                             sshCredentials: [
-                                username: "$USERNAME",
-                                encryptedPassphrase: "$USERPASS"
+                                username: "$USERNAME"
                             ], 
                             transfers: [
                                 sshTransfer(
