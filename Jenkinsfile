@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-            {
+            withCredentials(){
                 sshPublisher(
                     failOnError: true,
                     continueOnError: false,
